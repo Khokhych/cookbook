@@ -1,0 +1,86 @@
+@import '../../sass/media'
+@import '../../sass/variables'
+
+.cart_add
+  margin-bottom: 30px
+  &-area
+    width: 100%
+    height: 100px
+    display: block
+    border: none
+    border-bottom: 1px solid $third-color
+    margin-bottom: 15px
+
+.cart_title 
+  padding-top: 30px
+
+.carts
+  +max_768
+    padding: 0
+    margin-bottom: 0
+  ul
+    padding: 0
+    margin: 0
+    list-style: none
+  &-main_list
+    display: flex
+    flex-direction: column-reverse
+  &-main_item
+    padding: 15px
+    padding-left: 25px
+    +max_768
+      padding: 15px 25px
+    &:nth-child(odd)
+      background-color: $basic-color
+    &:nth-child(even)
+      background-color: $second-color
+  &-sub_item
+    +min_768
+      padding-bottom: 10px
+      margin-bottom: 10px
+    &:not(:last-child)
+      display: none
+      padding: 10px
+      margin-bottom: 10px
+      border: 1px solid $third-color
+      max-height: 250px
+      overflow-y: scroll
+  &-sub_list
+    display: flex
+    flex-direction: column-reverse
+    &-open
+      .carts-sub_item
+        display: block
+      
+  &-date
+    margin-bottom: 15px
+    background-color: $third-color
+    padding: 5px 10px
+    display: inline-block
+    font-weight: 100
+    border-radius: 5px
+    +max_768
+      margin-top: 15px
+  &-text 
+    word-wrap: break-word
+  &-text_area
+    border: none
+    border-bottom: 1px solid $third-color
+    margin-bottom: 10px
+    background-color: transparent
+    color: inherit
+    display: block
+    width: 100%
+    height: 50px
+    +max_768
+      margin-bottom: 30px
+  &-wrap_buttons
+    display: flex
+    justify-content: flex-start
+    +max_768
+      flex-direction: column
+    .button
+      +max_768
+        margin-bottom: 15px
+      +min_768
+        margin-right: 15px

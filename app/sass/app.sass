@@ -1,0 +1,35 @@
+@import './media'
+@import './variables'
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;700&display=swap')
+%ed
+    margin: 0
+body
+    font: 300 18px/1.2222222222 "Fira Sans","Helvetica Neue",Helvetica,Arial,sans-serif
+    @extend %ed
+    min-width: 320px
+    color: #CCC
+*
+    box-sizing: border-box
+button
+    color: inherit
+
+textarea
+    max-width: 100%
+    font: inherit
+    &:focus
+        outline: none
+
+button:focus
+    outline: none
+p
+    margin: 0 0 1em
+
+// --
+.container
+    margin: 0 auto 30px
+    padding: 15px
+    box-sizing: border-box
+
+    +min_1025
+        max-width: 1200px
+
