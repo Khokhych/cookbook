@@ -1,42 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Cart.sass';
 
 import Button from '../Button/Button';
+import CartAdd from './CartAdd';
+import Date from './Date';
 
 export default () => {
   const dispatch = useDispatch();
   const [subItems, setSubItems] = useState([]);
   const data = useSelector((state) => state.data);
-  const cartText = useRef();
-
-  const formatDate = (milliseconds) => {
-    const d = new Date(milliseconds);
-    const currDate = d.getDate();
-    const currMonth = d.getMonth() + 1;
-    const currYear = d.getFullYear();
-    return `${currYear}-${currMonth}-${currDate}`;
-  };
-
-  const setNewItem = () => {
-    if (!(cartText.current.value).length) {
-      return;
-    }
-    const { value } = cartText.current;
-    cartText.current.value = '';
-    const url = 'http://localhost:4000/add-cart';
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        recipe: value,
-      }),
-    }).then((response) => response.json())
-      .then((json) => dispatch({ type: 'ADD_CART', payload: json }))
-      .catch((e) => { console.log(e); });
-  };
 
   const setVersion = (e) => {
     const url = 'http://localhost:4000/add-cart/';
@@ -69,30 +42,16 @@ export default () => {
 
   return (
     <div>
-
       <h1 className="cart_title container">
         My cookbook
       </h1>
-
-      <div className="cart_add container">
-        <textarea
-          className="cart_add-area"
-          ref={cartText}
-          placeholder="Add a new recipe here"
-        />
-        <Button onClick={setNewItem} text="Add a recipe" />
-      </div>
+      <CartAdd />
 
       <div className="carts container">
         <ul className="carts-main_list">
           {data ? data.map((item) => (
-
             <li key={item._id} className="carts-main_item">
-
-              <div className="carts-date">
-                {`Date of creation - ${formatDate(item.date)}` }
-              </div>
-
+              <Date milliseconds={item.date} />
               <ul className={`carts-sub_list${subItems.find((e) => e === item._id) ? ' carts-sub_list-open' : ''}`}>
 
                 {item.versions.map((el, iter) => (
@@ -116,6 +75,9 @@ export default () => {
                     {iter === item.versions.length - 1
                       ? (
                         <div className="carts-wrap_buttons">
+                          <p className="desc">
+                            To save the field must not be empty
+                          </p>
                           <Button onClick={setVersion} text="Save changes" />
                           {item.versions.length > 1 ? (
                             <Button onClick={showOldVersions} text="Show / hide old versions" />
