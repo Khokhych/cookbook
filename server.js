@@ -21,7 +21,7 @@ app.post('/add-cart', (req, res) => {
       req.body.recipe,
     ],
   };
-  db.collection('recipes20').insertOne(recipe, (err, result) => {
+  db.collection('recip').insertOne(recipe, (err, result) => {
     if (err) {
       console.log(err);
       return res.sendStatus(500);
@@ -33,7 +33,7 @@ app.post('/add-cart', (req, res) => {
 app.put('/add-cart/:id', (req, res) => {
   const id = ObjectID(req.body.id);
 
-  db.collection('recipes20').updateOne({
+  db.collection('recip').updateOne({
     _id: id,
   }, {
     $push: {
@@ -44,7 +44,7 @@ app.put('/add-cart/:id', (req, res) => {
 });
 
 app.get('/add-cart', (req, res) => {
-  db.collection('recipes20').find().toArray((err, docs) => {
+  db.collection('recip').find().toArray((err, docs) => {
     if (err) {
       console.log(err);
       return res.sendStatus(500);
