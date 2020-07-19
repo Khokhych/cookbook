@@ -68,7 +68,9 @@ export default () => {
                       )
                       : (
                         <div key={iter} className="carts-text">
-                          {el}
+                          <pre>
+                            {el}
+                          </pre>
                         </div>
                       )}
 
